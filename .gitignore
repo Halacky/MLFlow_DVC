@@ -1,0 +1,31 @@
+/evaluation_report.txt
+# Virtual envs
+env/
+venv/
+.venv/
+env_hw_1/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# DVC cache
+.dvc/cache/
+
+# MLflow artifacts
+mlruns/
+mlflow.db
+
+# Models (если хочешь хранить только через DVC)
+models/
+!models/.gitignore
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,35 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py --params params.yaml
+    deps:
+    - data/raw/iris.csv
+    - src/prepare.py
+    params:
+    - prepare.random_state
+    - prepare.test_size
+    outs:
+    - data/processed/test.csv
+    - data/processed/train.csv
+  train:
+    cmd: python src/train.py --params params.yaml
+    deps:
+    - data/processed/test.csv
+    - data/processed/train.csv
+    - src/train.py
+    params:
+    - train.logreg.C
+    - train.logreg.max_iter
+    - train.model_type
+    - train.random_state
+    - train.rf.max_depth
+    - train.rf.n_estimators
+    outs:
+    - models/model.pkl
+  evaluate:
+    cmd: python src/evaluate.py --params params.yaml
+    deps:
+    - data/processed/test.csv
+    - models/model.pkl
+    - src/evaluate.py
+    outs:
+    - evaluation_report.txt
